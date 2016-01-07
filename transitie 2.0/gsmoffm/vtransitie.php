@@ -25,6 +25,7 @@ if ( defined( 'LEPTON_PATH' ) ) {
  * 20151207  aanpassing naar nieuw maximum (vtrantable wordt ook aangepast)
  * 20151229  aanpassing mail addressen
  * 20151229  edit tekst
+ * 20160105  ter voorkoming van errors
  */
 /*
  * variable setting
@@ -95,8 +96,11 @@ if ( defined( 'LEPTON_PATH' ) ) {
   'tvorkw' => 2,  
   'tvperc' => 0,   
   'tvamtc' => 0,  
-  'comment' => '',   
-  'selection_block' => 0,
+  'comment' => '',  
+  'tvref2kvk' => '', //   toegevoegd 20160105  
+  'tvref2vat' => '', //   toegevoegd 20160105  
+  'owner_email' => '', //   toegevoegd 20160105  
+  'selection_block' => 0, 
 );
 $regelsArr['project'] = $regelsArr[ 'app' ] . ' - Berekening';
 $regelsArr['login'] = (!isset($_SESSION[ 'USER_ID' ]) || $_SESSION[ 'USER_ID' ] <1) ? false : true;

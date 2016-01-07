@@ -27,6 +27,7 @@ if ( defined( 'WB_PATH' ) ) {
 } 
 /* change history
  * 20151207  aanpassing naar nieuw maximum (vtrantable wordt ook aangepast)
+ * 20150105  correctie berekening overgangs regeling 50+ 
  */
 function Gsm_login_person ($arr_in, $user_id) {
   // bepaal de persoonsgegevens indien login
@@ -449,7 +450,8 @@ function Gsm_trans_bereken( $Arr, $dates , $func = 1 ){
       if ($Arr [ 'tvorkw' ] != 1 // geen kleine werknemer
         && $calc ['a4'] < $Arr[ 'overgangsregeling' ][ 'einde' ] //geldigheids duur overgansregeling
         && $calc ['a12'] == 20 )   // arbeidsduur van tenminste 120 maanden
-        { $calc ['a36'] = $calc ['a10'] / 3 ; }   
+// vervalt 20150105          { $calc ['a36'] = $calc ['a10'] / 3 ; }   //
+		  { $calc ['a36'] = $calc ['a10'] / 4 ; }   // toegevoegd 20150105   
       $calc ['a37'] = $calc ['a36']+ $calc ['a35'];
       // Bepaling bedrag
       $calc ['a40'] = round($calc ['a37']* $calc ['a30'],2);

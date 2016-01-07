@@ -58,12 +58,12 @@ if (isset($settingArr['debug']) && $settingArr['debug']=="yes") $debug=true;
 /*
  * Location of files
  */
-//places of the includes
 $place_incl = (dirname( __FILE__ )).'/';
 //places of the language file 
 $place_lang  = ( dirname( __FILE__ ) ) . '/languages/' . LANGUAGE . '.php';
 // load module language file
-require_once(!file_exists($place_lang) ? (dirname(__FILE__)) . '/languages/EN.php' : $place_lang );
+require_once((dirname(__FILE__)) . '/languages/EN.php' );
+if (LANGUAGE!='EN' && file_exists($place_lang)) { require_once($place_lang);}
 // load includes
 require_once($place_incl.'includes.php' );
 

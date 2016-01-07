@@ -239,6 +239,9 @@ $LINETEMP[ 8 ] = '<td colspan="2" class="setting_value" ><input maxlength="%2$s"
 $LINETEMP[ 9 ] = '<tr %1$s><td>%2$s %3$s</td><td>%4$s</td></tr>'.CH_CR;
 $LINETEMP[ 10 ] = '<tr %1$s><td>%2$s</td><td>%3$s</td><td>%4$s</td><td colspan="2" >%5$s</td></tr>'.CH_CR;
 $LINETEMP[ 11 ] = '<tr><td>%1$s</td><td colspan="2">%2$s</td></tr>'.CH_CR;
+$LINETEMP[ 12 ] = '<tr %1$s><td colspan="2">%2$s</td><td>%3$s</td><td>%4$s</td><td>%5$s</td></tr>'.CH_CR;
+$LINETEMP[ 13 ] = '<tr><td colspan="2">%1$s</td><td colspan="3">%2$s</td></tr>'.CH_CR;
+$LINETEMP[ 14 ] = '<tr><td colspan="5">%1$s</td></tr>'.CH_CR;
 
 $ICONTEMP[ 1 ]  = '<input class="'.$MOD_GSMOFF[ 'tbl_icon2' ][9].'" name="command" type="submit" value="'.$MOD_GSMOFF[ 'tbl_icon' ][1].'" style="width: 100%;" />'.CH_CR;
 $ICONTEMP[ 2 ]  = '<input class="'.$MOD_GSMOFF[ 'tbl_icon2' ][3].'" name="command" type="submit" value="'.$MOD_GSMOFF[ 'tbl_icon' ][2].'" style="width: 100%;" />'.CH_CR;
@@ -255,7 +258,7 @@ $ICONTEMP[ 12 ]  = '<input class="'.$MOD_GSMOFF[ 'tbl_icon2' ][19].'" name="comm
 $ICONTEMP[ 13 ]  = '<input class="'.$MOD_GSMOFF[ 'tbl_icon2' ][20].'" name="%2$s" type="submit" value="%1$s" style="width: 100%;" />'.CH_CR;
 $ICONTEMP[ 14 ]  = '<input maxlength="12" size="12" type="text" name="select_van" value="%1$s" width="30" />%2$s'.CH_CR;
 $ICONTEMP[ 15 ]  = '<input maxlength="12" size="12" type="text" name="select_tot" value="%1$s" width="30" />'.CH_CR;
-//$ICONTEMP[ 16 ]  = '<input class="'.$MOD_GSMOFF[ 'tbl_icon2' ][19].'" name="command" type="submit" value="'.$MOD_GSMOFF[ 'tbl_icon' ][14].'" style="width: 100%;" />'.CH_CR;
+$ICONTEMP[ 16 ]  = '<input class="'.$MOD_GSMOFF[ 'tbl_icon2' ][19].'" name="command" type="submit" value="'.$MOD_GSMOFF[ 'tbl_icon' ][14].'" style="width: 100%;" />'.CH_CR;
 $ICONTEMP[ 17 ] = '<a target="_blank" href="' . $place['pdf1'] . '%2$s"><img src="' . $place['imgm'] . 'pdf_16.png" alt="pdf document">%1$s</a>'.CH_CR;
 $ICONTEMP[ 18 ] = '<a target="_blank" href="' . $place['pdf2'] . '%2$s"><img src="' . $place['imgm'] . 'pdf_16.png" alt="pdf document">%1$s</a>'.CH_CR;
 $ICONTEMP[ 19 ]  = ''.CH_CR;
