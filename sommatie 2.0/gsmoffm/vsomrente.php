@@ -1,11 +1,11 @@
 <?php
 /*
- *  @module         Office toolset legal
- *  @version        see info.php versie below
+ *  @module         Office toolset
+ *  @version        see below
  *  @author         Gerard Smelt
- *  @copyright      2015, Contracthulp B.V.
- *  @license        see info.php of this module
- *  @platform       see info.php of this module
+ *  @copyright      2010-2016 Contracthulp B.V.
+ *  @license        see below
+ *  @platform       see below
  */
 
 // include class.secure.php to protect this file and the whole CMS!
@@ -22,7 +22,8 @@ if ( defined( 'LEPTON_PATH' ) ) {
 }
 // end include class.secure.php
 /* change history
- * 20151229  aanpassing toevoeging van meer regels
+ * 20160114 vervaldag van 1 toegevoegd
+ * 20160114 correctie voor minium bedragen
  */
 /*
  * variable setting
@@ -33,7 +34,7 @@ $regelsArr = array(
   'module' => 'somrente',
 // voor versie display
   'modulen' => 'vsomrente',
-  'versie' => '  v20151229 ', 
+  'versie' => '  v20160114 ', 
 // general parameters  
   'app' => 'wettelijke rente ',
   'module2' => '',
@@ -112,7 +113,7 @@ $MOD_GSMOFF [ 'som_mail2' ] = "</br></br>Een mail is gestuurd naar het opgegeven
 $MOD_GSMOFF [ 'som_details' ]  = array ( '1' => 'Basic', '2' => 'Dossier aanleggen');
 $MOD_GSMOFF [ 'som_cont' ] = array ( '0' => 'Nee, wettelijke rente', '1' => 'Ja, in plaats van de wettelijke rente', '2' => 'Ja, bovenop de wettelijke rente' );
 $MOD_GSMOFF [ 'som_trans' ] = array ( '0' => 'Nee', '1' => 'Ja' );
-$MOD_GSMOFF [ 'som_verval' ] = array( '7' => '7 dagen', '14' => '14 dagen', '30' => '30 dagen', '45' => '45 dagen', '60' => '60 dagen');
+$MOD_GSMOFF [ 'som_verval' ] = array( '1' => '1 dag', '7' => '7 dagen', '14' => '14 dagen', '30' => '30 dagen', '45' => '45 dagen', '60' => '60 dagen');
 // overrule standard function
 $ICONTEMP[ 7 ]  = '<input class="'.$MOD_GSMOFF[ 'tbl_icon2' ][9].'" name="command" type="submit" value="'.$MOD_GSMOFF[ 'tbl_icon' ][7].'" style="width: 100%;" />'.CH_CR; 
 $ICONTEMP[ 8 ]  = '<input class="'.$MOD_GSMOFF[ 'tbl_icon2' ][2].'" name="command" type="submit" value="'.$MOD_GSMOFF[ 'tbl_icon' ][8].'" style="width: 100%;" />'.CH_CR;
@@ -162,11 +163,11 @@ if ( isset( $_POST[ 'command' ] ) ) {
   Gsm_attachment ($regelsArr['allow_ext' ], $regelsArr['file0'], $regelsArr['file1'], $regelsArr[ 'memored_recid' ], $MOD_GSMOFF[ 'som_att' ], $allow_size=6000000);  
   switch ( $_POST[ 'command' ] ) {
     case $MOD_GSMOFF[ 'tbl_icon' ][10]: // one entry more
-      $regelsArr[ 'memored_mutaties' ]++; // 20151229 toegevoegd
-      $regelsArr[ 'memored_mutaties' ]++; // 20151229 toegevoegd
-      $regelsArr[ 'memored_mutaties' ]++; // 20151229 toegevoegd
       $regelsArr[ 'memored_mutaties' ]++;
-      $regelsArr[ 'memory' ] = $regelsArr[ 'memored_mutaties' ];
+      $regelsArr[ 'memored_mutaties' ]++;
+      $regelsArr[ 'memored_mutaties' ]++;
+      $regelsArr[ 'memored_mutaties' ]++;
+	  $regelsArr[ 'memory' ] = $regelsArr[ 'memored_mutaties' ];
       $regelsArr[ 'mode' ] = 9;
       break;
     case $MOD_GSMOFF[ 'tbl_icon' ][7]: // set status op 2
@@ -214,7 +215,8 @@ if ( isset( $_POST[ 'command' ] ) ) {
 if ( $debug ) $msg[ 'bug' ] .= NL . __LINE__ . ' mode: ' . $regelsArr[ 'mode' ] . ' ' . ( ( isset( $query ) ) ? $query : "" ) . NL.NL;
 if ( $debug ) Gsm_debug( $regelsArr, __LINE__);
 // is er een e-mail address en een bedrag ?  dan opslaan update of als nieuw
-if (isset( $regelsArr['wrfacamt'] ) && isset( $regelsArr[ 'owner_email' ] ) && $regelsArr['wrfacamt'][1]>0  && strlen($regelsArr[ 'owner_email'])>12 ) {
+if (isset( $regelsArr['wrfacamt'] ) && isset( $regelsArr[ 'owner_email' ] ) && $regelsArr['wrfacamt'][1]!=0  && strlen($regelsArr[ 'owner_email'])>12 ) {  // added 20160114
+// removed 20160114  if (isset( $regelsArr['wrfacamt'] ) && isset( $regelsArr[ 'owner_email' ] ) && $regelsArr['wrfacamt'][1]>0  && strlen($regelsArr[ 'owner_email'])>12 ) { 
   if ($regelsArr[ 'mode' ] == 9) $regelsArr = array_merge($regelsArr, Gsm_record_data ($regelsArr[ 'file' ], $regelsArr , $status=0 ));
 } else {
   // als er geen bedrag is zorg dat opgeslagen data geselecteerd kan worden
@@ -386,7 +388,9 @@ switch ( $regelsArr[ 'mode' ] ){
 /*
  * Berekenen 
  */
-    if (isset( $regelsArr['wrfacamt'] ) && $regelsArr['wrfacamt'][1]>0 ) {
+
+// removed 20160114   if (isset( $regelsArr['wrfacamt'] ) && $regelsArr['wrfacamt'][1]!=0 ) { 
+	if (isset( $regelsArr['wrfacamt'] ) && $regelsArr['wrfacamt'][1]!=0 ) { // added 20160114
       // consument of business rates
       // welke parameters zijn relevant
       $calcArr = array (

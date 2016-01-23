@@ -1,10 +1,11 @@
 <?php
 /*
  *  @module         Office toolset
- *  @version        distributed as part of this module
- *  @copyright      2010-2014 Contracthulp B.V.
- *  @license        see info.php of this module
- *  @platform       see info.php of this module
+ *  @version        see below
+ *  @author         Gerard Smelt
+ *  @copyright      2010-2016 Contracthulp B.V.
+ *  @license        see below
+ *  @platform       see below
  */
  
  /*******************************************************************************

@@ -1,11 +1,11 @@
 <?php
 /*
- *  @module         Office toolset legal
- *  @version        see info.php versie below
+ *  @module         Office toolset
+ *  @version        see below
  *  @author         Gerard Smelt
- *  @copyright      2015, Contracthulp B.V.
- *  @license        see info.php of this module
- *  @platform       see info.php of this module
+ *  @copyright      2010-2016 Contracthulp B.V.
+ *  @license        see below
+ *  @platform       see below
  */
 
 // include class.secure.php to protect this file and the whole CMS!
@@ -22,6 +22,7 @@ if ( defined( 'LEPTON_PATH' ) ) {
 }
 // end include class.secure.php
 /* change history
+ * 20160121 toevoegen van webmaster/website ref
  */
 /*
  * variable setting
@@ -32,7 +33,7 @@ $regelsArr = array(
   'module' => 'login',
 // voor versie display
   'modulen' => 'vlogin',
-  'versie' => ' v20151122',
+  'versie' => ' v20160121 ',
 //database
   'table' => TABLE_PREFIX . 'users',
   'settings' => TABLE_PREFIX . 'settings',
@@ -40,6 +41,7 @@ $regelsArr = array(
   'stand' => 'standen',
   'adressen' => CH_DBBASE . '_adres',
   'adr'=> 'adres', 
+  'webmaster' => '', // add 20160121
 //
   'owner' => (isset($settingArr[ 'logo'])) ? $settingArr[ 'logo'] : '',  // ** This is the logo on the pdf **
   'self change' => ( strstr( $set_mode, "admin" ) ) ? false : true,
@@ -305,6 +307,7 @@ $settingsArray = array( );
 if ( !$results || $results->numRows() == 0 ) die( $message );
 while ( $row = $results->fetchRow() ) {$settingsArray[ $row[ 'name' ] ] = $row[ 'value' ];} //$row = $results->fetchRow()
 if ( $debug ) Gsm_debug( $settingsArray, __LINE__ );
+$regelsArr['webmaster'] = (isset($settingArr[ 'webmaster'])) ? $settingArr[ 'webmaster'] : $settingsArray[ 'website_title' ]; // add 20160121
 /*
  * some job to do
  */
@@ -489,10 +492,10 @@ if ( isset( $_GET[ 'command' ] ) && $_GET[ 'command' ] == 'notice' ) {
           $mailArr = array(
             'from' => $settingsArray[ 'server_email' ],
             'to' => $regelsArr[ 'loginname' ],
-            'subject' => $settingsArray[ 'website_title' ] . ' ' . $MOD_GSMOFF[ 'lgn_login' ],
+            'subject' => $regelsArr['webmaster'] . ' ' . $MOD_GSMOFF[ 'lgn_login' ],
             'body' => $MOD_GSMOFF[ 'lgn_add' ],
             'link' => CH_LOGIN . '&command=reset&ref=' . substr( $row[ 'password' ], 0, 3 ) . substr( $row[ 'username' ], 0, 5 ) . $row[ 'user_id' ],
-            'fromname' => $settingsArray[ 'website_title' ],
+            'fromname' => $regelsArr['webmaster'],
             'toname' => $hulp[ 0 ] 
            );
         } else {
@@ -535,10 +538,10 @@ if ( isset( $_GET[ 'command' ] ) && $_GET[ 'command' ] == 'notice' ) {
           $mailArr = array(
             'from' => $settingsArray[ 'server_email' ],
             'to' => $regelsArr[ 'loginname' ],
-            'subject' => $settingsArray[ 'website_title' ] . ' ' . $MOD_GSMOFF[ 'lgn_login' ],
+            'subject' => $regelsArr['webmaster'] . ' ' . $MOD_GSMOFF[ 'lgn_login' ],
             'body' => $MOD_GSMOFF[ 'lgn_upd' ],
             'link' => CH_LOGIN . '&command=reset&ref=' . substr( $row[ 'password' ], 0, 3 ) . substr( $row[ 'username' ], 0, 5 ) . $row[ 'user_id' ],
-            'fromname' => $settingsArray[ 'website_title' ],
+            'fromname' => $regelsArr['webmaster'],
             'toname' => str_replace( "|", " ", $row[ 'name' ] ) 
           );
         }
@@ -651,10 +654,10 @@ if ( isset( $_GET[ 'command' ] ) && $_GET[ 'command' ] == 'notice' ) {
         'from' => $settingsArray[ 'server_email' ],
         'cc' => $settingsArray[ 'server_email' ],
         'to' => $regelsArr[ 'email' ],
-        'subject' => $settingsArray[ 'website_title' ] . ' ' . $MOD_GSMOFF[ 'lgn_rem' ],
+        'subject' => $regelsArr['webmaster'] . ' ' . $MOD_GSMOFF[ 'lgn_rem' ],
         'body' => '',
         'link' => CH_LOGIN . '&command=notice&ref=' . substr( $row[ 'password' ], 0, 3 ) . substr( $row[ 'username' ], 0, 5 ) . $row[ 'user_id' ],
-        'fromname' => $settingsArray[ 'website_title' ],
+        'fromname' => $regelsArr['webmaster'],
         'toname' => str_replace( "|", " ", $row[ 'display_name' ] ),
         'syndic' => $regelsArr[ 'syndic' ],
         'uwnaam' => $regelsArr[ 'nwnaam' ][ 0 ] . ' ' . $regelsArr[ 'nwnaam' ][ 1 ] . ' ' . $regelsArr[ 'nwnaam' ][ 2 ] . ' ' . $regelsArr[ 'nwnaam' ][ 3 ],

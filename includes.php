@@ -1,11 +1,11 @@
 <?php
 /*
- *  @module         Office toolset legal
- *  @version        see info.php versie below
+ *  @module         Office toolset
+ *  @version        see below
  *  @author         Gerard Smelt
- *  @copyright      2010 - 2015, Contracthulp B.V.
- *  @license        see info.php of this module
- *  @platform       see info.php of this module
+ *  @copyright      2010-2016 Contracthulp B.V.
+ *  @license        see below
+ *  @platform       see below
  */
  
 if ( defined( 'LEPTON_PATH' ) ) {
@@ -20,6 +20,9 @@ if ( defined( 'LEPTON_PATH' ) ) {
   }
 }
 // end include class.secure.php
+/* change history
+ * 20160114 commented out pdf class removed
+ */
  
 /*
  * Message section 
@@ -27,7 +30,7 @@ if ( defined( 'LEPTON_PATH' ) ) {
  $regelsArr_include = array(
 // voor versie display
   'modulen' => 'includes',
-  'versie' => ' v20151120 '
+  'versie' => ' v20160114 '
 );
 /*
  * message section
@@ -78,133 +81,6 @@ function Gsm_prout ( $template, $parseArray ) {
   foreach ( $parseArray as $key => $value ) { $returnvalue = str_replace( "{" . $key . "}", $value, $returnvalue ); } 
   return $returnvalue;
 }
-/*
-//-------------------------------------------
-// Pdf generator definitions
-//-------------------------------------------
-$pdfclass = (dirname(__FILE__)) . '/class.fpdf.php';
-require_once($pdfclass);
-class PDF extends FPDF
-  {
-  function Header( ) {
-    global $place;
-    global $owner;
-    global $title;
-    // Logo
-    if  (strpos($owner, 'T0') !== false) { 
-      $this->Image( $place['imgm'].'T0logo.png' ,135,10,45); 
-    } elseif (strpos($owner, 'R0') !== false) { 
-      $this->Image( $place['imgm'].'R0logo.png' ,135,10,45);
-		} elseif (strpos($owner, 'A0') !== false) { 
-			$this->Image( $place['imgm'].'A0logo.png' ,135,10,45);
-    } else {  
-      $this->Image( $place['imgm'].'logo.png' ,135,10,45);}
-    $this->Ln(10);
-    $this->SetXY(10, 10);
-    $this->SetFont('Arial','B',10);
-    $this->Cell(0,10,$title,0,0,'L');
-    $this->SetXY(125, 30);
-    $this->Ln(10);
-  }
-  function Footer() {
-    global $run;
-    // Position at 1.5 cm from bottom
-    $this->SetY(-15);
-    // Arial italic 8
-    $this->SetFont('Arial','I',8);
-    // Page number
-    $this->Cell(0,10, '     Page: '.$this->PageNo().'/{nb}',0,0,'R');
-  }
-  function AdresBlock ($para1, $para2, $para3, $para4, $para5=" ", $para6=" ") {
-    // adresblock
-    // naam adres regels, onderwerp datum en begroeting
-    $this->SetXY( 20, 55);
-    $this->SetFont('Arial','B',11);
-    $this->MultiCell(100,5,$para1);
-    $this->Ln(1);
-    $this->SetXY(135, 20);
-    $this->SetFont('Arial','B',8);
-    $this->MultiCell(0,5,$para2);
-    $this->SetXY(135, 50);
-    $this->SetFont('Arial','',8);
-    $this->MultiCell(0,4,$para5);
-    $this->Ln(1);
-    $this->SetXY( 10, 100);
-    $this->SetFont('Arial','',10);
-    $this->MultiCell(100,5,$para3);
-    $this->Ln(1);
-     $this->SetXY( 135, 95);
-    $this->SetFont('Arial','',10);
-    $this->MultiCell(100,5,$para6);
-    $this->Ln(1);
-    $this->SetXY( 10, 110);
-    $this->SetFont('Arial','',10);
-    $this->MultiCell(100,5,$para4);
-    $this->Ln(1);
-    $this->SetXY( 0, 105);
-    $this->SetFont('Arial','',10);
-    $this->MultiCell(100,5,'.');
-    $this->Ln(1); 
-  } 
-  function ChapterTitle($num, $label) {
-    $this->SetFont('Arial','',10);
-    // Title
-    $this->SetFillColor(200,220,255);
-    $this->Cell(0,6,$num.' : '.$label,0,1,'L',true);
-    $this->Ln(4);
-  }
-  function ChapterBody($para) {
-    $this->SetFont('Arial','',10);
-    $this->MultiCell(0,5,$para);
-    $this->Ln(1);
-  }
-  function ChapterKlein($para) {
-    $this->SetFont('Arial','',7);
-    $this->MultiCell(0,3,$para);
-    $this->Ln(1);
-  }
-  function DataTable($header, $data, $cols=array(55, 35, 35, 20, 20, 20) ) {
-    // Colors, line width and bold font
-    $this->SetFillColor(168,168,168);
-    $this->SetTextColor(255);
-    $this->SetDrawColor(128,125,125);
-    $this->SetLineWidth(.3);
-    $this->SetFont('','B');
-    // Column widths
-    $w = $cols;
-    // Header
-    for($i=0;$i<count($header);$i++)
-    $this->Cell($w[$i],7,$header[$i],1,0,'C',true);
-    $this->Ln();
-    // Color and font restoration
-    $this->SetFillColor(224,224,224);
-    $this->SetTextColor(0);
-    $this->SetFont('');
-    // Data
-    $fill = false;
-    foreach($data as $row) {
-      $this->Cell($w[0],6,$row[0],'L',0,'L',$fill);
-      $this->Cell($w[1],6,$row[1],'L',0,'L',$fill);
-      $this->Cell($w[2],6,$row[2],'L',0,'R',$fill);
-      $this->Cell($w[3],6,$row[3],0,0,'R', (count($header)>3) ? $fill : '');
-      $this->Cell($w[4],6,$row[4],0,0,'R', (count($header)>4) ? $fill : '');
-      $this->Cell($w[5],6,$row[5],0,0,'R', (count($header)>5) ? $fill : '');
-      $this->Ln();
-      $fill = !$fill;
-    }
-    // Closing line
-//    $this->Cell(array_sum($w),0,'','T');
-//    $this->Ln();
-  }
-  function LoadData($file) {
-    // Read file lines
-    $lines = file($file);
-    $data = array();
-    foreach($lines as $line) { $data[] = explode(';',trim($line));}
-    return $data;
-  }
-}
-*/
 /*
  * display array for debugging arrays
  */

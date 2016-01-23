@@ -1,11 +1,11 @@
 <?php
 /*
- *  @module         Office toolset legal
- *  @version        see info.php of this template
+ *  @module         Office toolset
+ *  @version        see below
  *  @author         Gerard Smelt
- *  @copyright      2010 - 2015, Contracthulp B.V.
- *  @license        see info.php of this module
- *  @platform       see info.php of this module
+ *  @copyright      2010-2016 Contracthulp B.V.
+ *  @license        see below
+ *  @platform       see below
  */
 
 // include class.secure.php to protect this file and the whole CMS!

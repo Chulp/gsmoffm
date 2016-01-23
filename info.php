@@ -1,9 +1,9 @@
 <?php
 /*
- *  @module         Office toolset legal
+ *  @module         Office toolset
  *  @version        see below
  *  @author         Gerard Smelt
- *  @copyright      2010-2015 Contracthulp B.V.
+ *  @copyright      2010-2016 Contracthulp B.V.
  *  @license        see below
  *  @platform       see below
  */
@@ -24,12 +24,12 @@ if ( defined( 'LEPTON_PATH' ) ) {
 $module_directory = 'gsmoffm';
 $module_name = 'Office Module';
 $module_function = 'page';
-$module_version = '2.1.0';
-$module_platform = '2.0.0';
+$module_version = '2.2.0';
+$module_platform = '2.1.0';
 $module_author = 'Gerard Smelt';
 $module_license = 'All rights reserved';
 $module_license_terms = 'All rights reserved';
-$module_guid = 'DC0CAA6A-ACB5-4B5A-B7DC-5E91823402CC';
+$module_guid = 'BF94B254-BB42-4BDA-84B3-3A4CC6D930B9';
 $module_description = 'This module provides basic functionality for the gsm office application. Tools application is to be pre-installed';
 $module_home = 'http://www.contracthulp.nl';
 

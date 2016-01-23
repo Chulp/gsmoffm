@@ -1,16 +1,11 @@
 <?php
-/**
- *  @module         Office_files
- *  @version        see info.php of this module
+/*
+ *  @module         Office toolset
+ *  @version        see below
  *  @author         Gerard Smelt
- *  @copyright      2013, ContractHulp B.V.
- *  @system         Developped and tested under Lepton 1.2.2
- *  @license        All rights reserved
- *  @license terms  see info.php of this module
- *  @platform       see info.php of this module
- *  @requirements   PHP 5.2.x and higher
- *
- *     select.php:     invoked in the front
+ *  @copyright      2010-2016 Contracthulp B.V.
+ *  @license        see below
+ *  @platform       see below
  */
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('WB_PATH')) {
